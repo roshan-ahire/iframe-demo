@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+
+  <body>
+    <h2 class="text-center m-3">iframe Demo</h2>
+
+    <div id="app">
+      <div class="container-fluid mt-2 mb-5">
+        <div class="row justify-content-center mb-5">
+          <div v-for="list in lists" :key="list.index" class="col-md-6 mt-4">
+            <h4>{{list.srNo}}</h4>
+            <div>
+              <iframe
+                width="100%"
+                height="315"
+                :src="list.IframeSrc"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" v-model="urls.url1" />
+            <button
+              type="button"
+              @click="onClick(urls.url1,0)"
+              class="btn btn-sm btn-primary"
+            >
+              click 1st
+            </button>
+          </div>
+          <div class="col-md-3">
+            <input type="text" v-model="urls.url2" />
+            <button
+              type="button"
+              @click="onClick(urls.url2,1)"
+              class="btn btn-sm btn-primary"
+            >
+              click 2st
+            </button>
+          </div>
+          <div class="col-md-3">
+            <input type="text" v-model="urls.url3" />
+            <button
+              type="button"
+              @click="onClick(urls.url3,2)"
+              class="btn btn-sm btn-primary"
+            >
+              click 3st
+            </button>
+          </div>
+          <div class="col-md-3">
+            <input type="text" v-model="urls.url4" />
+            <button
+              type="button"
+              @click="onClick(urls.url4,3)"
+              class="btn btn-sm btn-primary"
+            >
+              click 4st
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      myObject = new Vue({
+        el: "#app",
+        data: {
+          urls: {},
+          lists: [
+            {
+              IframeSrc: "https://royalexch.in/#/login",
+              srNo: 1
+            },
+            {
+              IframeSrc: "https://backend.kingsexch.com/#!/",
+              srNo: 2
+            },
+            {
+              IframeSrc: "https://bookmaker-ui.kingsplay.co",
+              srNo: 3
+            },
+            {
+              IframeSrc: "https://backend.kingsexch.com/#!/",
+              srNo: 4
+            }
+          ]
+        },
+        methods: {
+          onClick(url, no) {
+            if (this.lists[no]) {
+              this.lists[no].IframeSrc = url;
+            } else {
+              this.lists.push({ IframeSrc: url, srNo: no + 1 });
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
