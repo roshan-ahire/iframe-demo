@@ -16,11 +16,16 @@
     <div id="app">
       <div class="container-fluid mt-2 mb-5">
         <div class="row justify-content-center mb-5">
-          <div v-for="list in lists" :key="list.index" class="col-md-6 mt-4">
+          <div
+            v-for="(list,index) in lists"
+            :key="list.index"
+            class="col-md-6 mt-4"
+          >
             <h4>{{list.srNo}}</h4>
-            <div>
+            <div class="wrap">
               <iframe
                 width="100%"
+                class="frame"
                 height="315"
                 :src="list.IframeSrc"
                 frameborder="0"
@@ -28,48 +33,17 @@
                 allowfullscreen
               ></iframe>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <input type="text" v-model="urls.url1" />
-            <button
-              type="button"
-              @click="onClick(urls.url1,0)"
-              class="btn btn-sm btn-primary"
-            >
-              click 1st
-            </button>
-          </div>
-          <div class="col-md-3">
-            <input type="text" v-model="urls.url2" />
-            <button
-              type="button"
-              @click="onClick(urls.url2,1)"
-              class="btn btn-sm btn-primary"
-            >
-              click 2st
-            </button>
-          </div>
-          <div class="col-md-3">
-            <input type="text" v-model="urls.url3" />
-            <button
-              type="button"
-              @click="onClick(urls.url3,2)"
-              class="btn btn-sm btn-primary"
-            >
-              click 3st
-            </button>
-          </div>
-          <div class="col-md-3">
-            <input type="text" v-model="urls.url4" />
-            <button
-              type="button"
-              @click="onClick(urls.url4,3)"
-              class="btn btn-sm btn-primary"
-            >
-              click 4st
-            </button>
+
+            <div class="text-center bg mt-2">
+              <input type="text" v-model="urls[index]" />
+              <button
+                type="button"
+                @click="onClick(urls[index],index)"
+                class="btn btn-sm btn-primary"
+              >
+                url {{index+1}}st
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -79,7 +53,7 @@
       myObject = new Vue({
         el: "#app",
         data: {
-          urls: {},
+          urls: [],
           lists: [
             {
               IframeSrc: "https://royalexch.in/#/login",
@@ -94,7 +68,7 @@
               srNo: 3
             },
             {
-              IframeSrc: "https://backend.kingsexch.com/#!/",
+              IframeSrc: "http://diamondexch.com/login",
               srNo: 4
             }
           ]
@@ -111,4 +85,43 @@
       });
     </script>
   </body>
+  <style>
+    .wrap {
+      width: 100%;
+      height: 378px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .frame {
+      width: 1234px;
+      height: 786px;
+      border: 0;
+      -ms-transform: scale(0.25);
+      -moz-transform: scale(0.25);
+      -o-transform: scale(0.25);
+      -webkit-transform: scale(0.25);
+      transform: scale(0.5);
+      -ms-transform-origin: 0 0;
+      -moz-transform-origin: 0 0;
+      -o-transform-origin: 0 0;
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+    }
+
+    /* .wrap {
+          width: 640px;
+          height: 480px;
+          overflow: hidden;
+        }
+
+        .iframe {
+          width: 76.92% !important;
+          height: 76.92% !important;
+          -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+          -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+        } */
+  </style>
 </html>
